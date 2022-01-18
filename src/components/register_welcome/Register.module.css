@@ -84,61 +84,70 @@ input {
   height: 50px;
   width: 50px;
   margin-left: 15px;
+  border: 5px solid #FFFFFF;
+  cursor: pointer;
 }
 
 .color_2 {
-  height: 50px;
-  width: 50px;
-  background: #ff865c;
-  margin-left: 15px;
+    height: 50px;
+    width: 50px;
+    background: #ff865c;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
 .color_3 {
-  height: 50px;
-  width: 50px;
-  background: #ffea5c;
-  margin-left: 15px;
+    height: 50px;
+    width: 50px;
+    background: #ffea5c;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
 .color_4 {
-  height: 50px;
-  width: 50px;
-  background: #00da76;
-  margin-left: 15px;
+    height: 50px;
+    width: 50px;
+    background: #00da76;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
 .color_5 {
-  height: 50px;
-  width: 50px;
-  background: #0096ce;
-  margin-left: 15px;
+    height: 50px;
+    width: 50px;
+    background: #0096ce;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
 .color_6 {
-  height: 50px;
-  width: 50px;
-  background: #800fff;
-  margin-left: 15px;
+    height: 50px;
+    width: 50px;
+    background: #800fff;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
 .btn_next {
-  height: 67px;
-  width: 425px;
-  background: #00da76;
-  font-family: Silkscreen;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 24px;
-  text-align: center;
-  letter-spacing: -0.333333px;
-  color: #ffffff;
+    height: 67px;
+    width: 425px;
+    background: #00da76;
+    font-family: Silkscreen;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.333333px;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
 }
 
 .copyright {
-  font-family: Fira Code;
-  font-style: normal;
-  font-weight: 450;
+    font-family: Fira Code;
+    font-style: normal;
+    font-weight: 450;
   font-size: 18px;
   line-height: 24px;
   letter-spacing: -0.333333px;
