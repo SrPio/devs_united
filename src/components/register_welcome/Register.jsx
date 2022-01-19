@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./Register.module.css";
 
-function Register() {
+function Register({isSelectedColor, setIsSelectedColor}) {
+
+
   return (
     <div className={styles.register}>
       <div className={styles.container_left}>
@@ -14,12 +16,12 @@ function Register() {
         Select your favorite color
         </h1>
         <div className={styles.colors}>
-            <div className={styles.color_1}></div>
-            <div className={styles.color_2}></div>
-            <div className={styles.color_3}></div>
-            <div className={styles.color_4}></div>
-            <div className={styles.color_5}></div>
-            <div className={styles.color_6}></div>
+            <button className={`${isSelectedColor === "pink" ? styles.colorSelectedBorder : ""} ${styles.color_1}`} onClick={() => {setIsSelectedColor("pink")}}></button>
+            <button className={`${isSelectedColor === "orange" ? styles.colorSelectedBorder : ""} ${styles.color_2}`} onClick={() => {setIsSelectedColor("orange")}} ></button>
+            <button className={`${isSelectedColor === "yellow" ? styles.colorSelectedBorder : ""} ${styles.color_3}`} onClick={() => {setIsSelectedColor("yellow")}}></button>
+            <button className={`${isSelectedColor === "green" ? styles.colorSelectedBorder : ""} ${styles.color_4}`} onClick={() => {setIsSelectedColor("green")}}></button>
+            <button className={`${isSelectedColor === "blue" ? styles.colorSelectedBorder : ""} ${styles.color_5}`} onClick={() => {setIsSelectedColor("blue")}}></button>
+            <button className={`${isSelectedColor === "purple" ? styles.colorSelectedBorder : ""} ${styles.color_6}`} onClick={() => {setIsSelectedColor("purple")}}></button>
         </div>
         <button className={styles.btn_next}>CONTINUE</button>
         <h1 className={styles.copyright}>

@@ -84,7 +84,7 @@ input {
   height: 50px;
   width: 50px;
   margin-left: 15px;
-  border: 5px solid #FFFFFF;
+  
   cursor: pointer;
 }
 
@@ -153,4 +153,8 @@ input {
   letter-spacing: -0.333333px;
   color: #60265b;
   margin-top: 86px;
+}
+
+.colorSelectedBorder{
+  border: 5px solid #FFFFFF;
 }
