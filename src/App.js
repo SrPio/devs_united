@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/login/Login';
 import Register from './components/register_welcome/Register';
 import { useState } from 'react';
+import Feed from './components/feed/Feed';
 
 function App() {
 
@@ -10,8 +11,8 @@ function App() {
   const [isSelectedColor,setIsSelectedColor] = useState("pink")
   return (
     <div className="App">
-      
-      <Register isSelectedColor={isSelectedColor} setIsSelectedColor={setIsSelectedColor}/>
+      <Feed />
+      {/*<Register isSelectedColor={isSelectedColor} setIsSelectedColor={setIsSelectedColor}/>*/}
     </div>
   );
 }
