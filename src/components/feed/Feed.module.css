@@ -1,5 +1,5 @@
-.feed{
-    background: #2E132C;
+.feed {
+  background: #2e132c;
 }
 
 header {
@@ -26,7 +26,8 @@ header {
   -moz-border-radius: 100%;
   -ms-border-radius: 100%;
   -o-border-radius: 100%;
-  border: 3px solid #FFEA5C;
+  border: 3px solid #ffea5c;
+  
 }
 
 .logo {
@@ -38,12 +39,85 @@ header {
 .title {
   width: 159px;
   height: 14, 72px;
-  margin: 19px 0 19px 0;
 }
 
-.postSection{
-    height: 218px;
-    width: 100%;
-    background: #150714;
+.postSection {
+  height: 218px;
+  width: 100%;
+  background: #150714;
+  display: flex;
+  justify-content: center;
+}
 
+.internalPostSection {
+  display: flex;
+  width: 605px;
+  height: 218px;
+  padding: 20px 0 0 0;
+  /*border: 1px solid #000;*/
+}
+.internalpostSection,
+img {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+}
+
+.postArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.inputPost {
+  width: 500px;
+  height: 113px;
+  margin-left: 17px;
+
+  background: #2f112d;
+  border: none;
+
+  font-family: Fira Code;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 20px;
+  color: #914d8b;
+  padding: 6px;
+  resize: none;
+}
+
+.limitText {
+  font-family: Fira Code;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 21px;
+  color: #f50d5a;
+  margin: 6px 0 7px;
+}
+
+.postButton {
+  border: none;
+  cursor: pointer;
+  height: 35px;
+  width: 102px;
+}
+
+.postButton img {
+  height: 35px;
+  width: 102px;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+
+article{
+  background: #2E132C;
+  height: 100vh;
 }
