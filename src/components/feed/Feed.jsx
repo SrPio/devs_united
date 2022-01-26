@@ -19,6 +19,7 @@ const INITIAL_FORM_DATA = {
   email: "",
   uid: "",
   autor: "",
+  photo: "",
 };
 
 function Feed() {
@@ -37,13 +38,14 @@ function Feed() {
             autor: doc.data().autor,
             email: doc.data().email,
             uid: doc.data().uid,
+            photo: doc.data().photo,
           };
         },
         (error) => {
           console.log(error, "Error en snapshot");
         }
       );
-      //console.log(postsData);
+      console.log(postsData);
       setPosts(postsData);
     });
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
@@ -64,6 +66,7 @@ function Feed() {
         email: userLog.email,
         uid: userLog.uid,
         autor: userLog.displayName,
+        photo: userLog.photoURL,
       };
     });
   };
@@ -141,7 +144,7 @@ function Feed() {
         {posts.map((post) => {
           return (
             <div className={styles.post} key={post.id}>
-              <img className={styles.postPic} src={userLog.photoURL} alt="" />
+              <img className={styles.postPic} src={post.photo} alt="" />
               <div className={styles.contentPost}>
                 <p className={styles.autor}>{post.autor}</p>
                 <p className={styles.message}>{post.message}</p>
