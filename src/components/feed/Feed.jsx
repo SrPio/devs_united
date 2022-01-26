@@ -43,7 +43,7 @@ function Feed() {
           console.log(error, "Error en snapshot");
         }
       );
-      console.log(postsData);
+      //console.log(postsData);
       setPosts(postsData);
     });
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
@@ -162,11 +162,11 @@ function Feed() {
               </div>
               {post.uid === userLog?.uid ? (
                 <button
-                  id={post.id}
+                  
                   onClick={handlerDelete}
                   className={styles.deleteButton}
                 >
-                  <img className={styles.deleteImg} src="./images/delete.svg" alt="" />
+                  <img id={post.id} src="./images/delete.svg" alt="" />
                 </button>
               ) : null}
             </div>
