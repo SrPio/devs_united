@@ -20,6 +20,7 @@ const INITIAL_FORM_DATA = {
   uid: "",
   autor: "",
   photo: "",
+  postDate: "",
 };
 
 function Feed() {
@@ -39,18 +40,19 @@ function Feed() {
             email: doc.data().email,
             uid: doc.data().uid,
             photo: doc.data().photo,
+            postDate: doc.data().postDate,
           };
         },
         (error) => {
           console.log(error, "Error en snapshot");
         }
       );
-      console.log(postsData);
+      //console.log(postsData);
       setPosts(postsData);
     });
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
       setUserLog(user);
-      //console.log(user);
+      console.log(user);
     });
     return () => {
       unsub();
@@ -67,6 +69,7 @@ function Feed() {
         uid: userLog.uid,
         autor: userLog.displayName,
         photo: userLog.photoURL,
+        postDate: obtenerFecha(),
       };
     });
   };
@@ -92,10 +95,19 @@ function Feed() {
     });
   };
 
+  const obtenerFecha = () => {
+
+    const fecha = new Date();
+    const dia = fecha.getDate();
+    const mes = fecha.toLocaleString("en-US", { month: "short" });
+    const fechaFormateada = ` - ${dia} ${mes}.`;
+    return fechaFormateada;
+  };
+
   return (
     <div className={styles.feed}>
       <header>
-      {userLog ? (
+        {userLog ? (
           <div className="user-profile">
             <img className="user-profile-pic" src={userLog.photoURL} alt="" />
             <p>¡Hola {userLog.displayName}!</p>
@@ -123,7 +135,11 @@ function Feed() {
       </header>
       <div className={styles.postSection}>
         <div className={styles.internalPostSection}>
-            <img className={styles.imginternalPostSection}src="./images/profilePic.png" alt="" />
+          <img
+            className={styles.imginternalPostSection}
+            src="./images/profilePic.png"
+            alt=""
+          />
           <div className={styles.postArea}>
             <form onSubmit={handleSubmit}>
               <textarea
@@ -147,6 +163,7 @@ function Feed() {
               <img className={styles.postPic} src={post.photo} alt="" />
               <div className={styles.contentPost}>
                 <p className={styles.autor}>{post.autor}</p>
+                <p className={styles.postDate}> {post.postDate}</p>
                 <p className={styles.message}>{post.message}</p>
                 <button
                   className={styles.likesButton}
@@ -164,11 +181,7 @@ function Feed() {
                 </button>
               </div>
               {post.uid === userLog?.uid ? (
-                <button
-                  
-                  onClick={handlerDelete}
-                  className={styles.deleteButton}
-                >
+                <button onClick={handlerDelete} className={styles.deleteButton}>
                   <img id={post.id} src="./images/delete.svg" alt="" />
                 </button>
               ) : null}
