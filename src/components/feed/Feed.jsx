@@ -27,6 +27,7 @@ function Feed() {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
   const [userLog, setUserLog] = useState(null);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -57,6 +58,37 @@ function Feed() {
     return () => {
       unsub();
       unsubscribeAuth();
+    };
+  }, []);
+
+  //useEffect de los datos del usuario
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+      const usersData = snapshot.docs.map(
+        (doc) => {
+          return {
+            email: doc.data().email,
+            name: doc.data().name,
+            username: doc.data().username,
+            uid: doc.data().uid,
+            photo: doc.data().photo,
+            colorUI: doc.data().colorUI,
+          };
+        },
+        (error) => {
+          console.log(error, "Error en snapshot");
+        }
+      );
+      //console.log(usersData);
+      setUsers(usersData);
+    });
+    /* const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+      setUserLog(user);
+      console.log(user);
+    }); */
+    return () => {
+      unsub();
+      //unsubscribeAuth();
     };
   }, []);
 
@@ -96,7 +128,6 @@ function Feed() {
   };
 
   const obtenerFecha = () => {
-
     const fecha = new Date();
     const dia = fecha.getDate();
     const mes = fecha.toLocaleString("en-US", { month: "short" });
@@ -104,10 +135,45 @@ function Feed() {
     return fechaFormateada;
   };
 
+  const userInformation = () => {
+    users.map((user) => {
+      return {
+        usernameTag: user.username,
+        email: user.email,
+        name: user.name,
+        username: user.username,
+        uid: user.uid,
+        photo: user.photo,
+        colorUI: user.colorUI,
+      };
+    });
+  };
+
+  const generateUsername = () => {
+    let username = "";
+    let userdata = "";
+    let postdata = "";
+    users.map((user) => {
+      return (userdata = {
+        usernameTag: user.username,
+        email: user.email,
+      });
+    });
+    posts.map((post) => {
+      return (postdata = { emailPost: post.email });
+    });
+
+    if (userdata.email === postdata.emailPost) {
+      username = userdata.usernameTag;
+    }
+
+    return username;
+  };
+
   return (
     <div className={styles.feed}>
       <header>
-        {userLog ? (
+        {/* {userLog ? (
           <div className="user-profile">
             <img className="user-profile-pic" src={userLog.photoURL} alt="" />
             <p>¡Hola {userLog.displayName}!</p>
@@ -117,13 +183,17 @@ function Feed() {
           <button className="login-btn" onClick={loginConGoogle}>
             Login con Google
           </button>
-        )}
+        )} */}
         <div className={styles.titleBox}>
-          <img
-            src="./images/profilePic.png"
-            alt="Profile pic"
-            className={styles.profilePic}
-          />
+          {users.map((user) => {
+            return (
+              <img
+                src={user.photo}
+                alt="Profile pic"
+                className={styles.profilePic}
+              />
+            );
+          })}
           <img
             src="./images/logo_small.svg"
             alt="Logo"
@@ -135,35 +205,40 @@ function Feed() {
       </header>
       <div className={styles.postSection}>
         <div className={styles.internalPostSection}>
-          <img
-            className={styles.imginternalPostSection}
-            src="./images/profilePic.png"
-            alt=""
-          />
-          <div className={styles.postArea}>
-            <form onSubmit={handleSubmit}>
-              <textarea
-                className={styles.inputPost}
-                placeholder="What’s happening?"
-                onChange={handleChange}
-                value={newPost.message}
+          {users.map((user) => {
+            return (
+              <img
+                className={styles.imginternalPostSection}
+                src={user.photo}
+                alt=""
               />
-              <button /*disabled="disabled"*/ className={styles.postButton}>
-                <img src="./images/button_post_off.svg" alt="" />
-              </button>
-            </form>
+            );
+          })}
+          <form onSubmit={handleSubmit} className={styles.postArea}>
+            <textarea
+              className={styles.inputPost}
+              placeholder="What’s happening?"
+              onChange={handleChange}
+              value={newPost.message}
+            />
             <h1 className={styles.limitText}>200 max.</h1>
-          </div>
+            <button /*disabled="disabled"*/ className={styles.postButton}>
+              <img src="./images/button_post_off.svg" alt="" />
+            </button>
+          </form>
         </div>
       </div>
       <article>
+        {console.log(users)}
         {posts.map((post) => {
           return (
             <div className={styles.post} key={post.id}>
               <img className={styles.postPic} src={post.photo} alt="" />
               <div className={styles.contentPost}>
-                <p className={styles.autor}>{post.autor}</p>
-                <p className={styles.postDate}> {post.postDate}</p>
+                <div className={styles.container_name_date}>
+                  <p className={styles.autor}>{generateUsername()}</p>
+                  <p className={styles.dateStyle}> {post.postDate}</p>
+                </div>
                 <p className={styles.message}>{post.message}</p>
                 <button
                   className={styles.likesButton}

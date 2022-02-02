@@ -72,3 +72,166 @@
 span {
   color: #f50d5a;
 }
+
+
+/* estilos Register */
+.register {
+  display: flex;
+}
+
+.container_left {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_right {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.principal_title {
+  font-family: "Silkscreen";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 50px;
+  letter-spacing: -0.333333px;
+  color: #ffffff;
+  width: 433px;
+  height: 100px;
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+span {
+  color: #f50d5a;
+}
+
+input {
+  margin-bottom: 30px;
+  height: 67px;
+  width: 425px;
+  background: #150714;
+  border: none;
+
+  font-family: Fira Code;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 24px;
+  line-height: 31px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.333333px;
+  padding: 19px;
+
+  color: #914d8b;
+}
+
+::placeholder {
+    color: #914d8b;
+  }
+
+.subtitle {
+  font-family: Fira Code;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 24px;
+  line-height: 31px;
+  text-align: left;
+  letter-spacing: -0.333333px;
+  color: #ffffff;
+  margin-bottom: 27px;
+}
+
+.colors {
+  display: flex;
+  margin-bottom: 52px;
+}
+
+.color_1 {
+  background: #f50d5a;
+  /*border: 5px solid #ffffff;*/
+  height: 50px;
+  width: 50px;
+  margin-left: 15px;
+  
+  cursor: pointer;
+}
+
+.color_2 {
+    height: 50px;
+    width: 50px;
+    background: #ff865c;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.color_3 {
+    height: 50px;
+    width: 50px;
+    background: #ffea5c;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.color_4 {
+    height: 50px;
+    width: 50px;
+    background: #00da76;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.color_5 {
+    height: 50px;
+    width: 50px;
+    background: #0096ce;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.color_6 {
+    height: 50px;
+    width: 50px;
+    background: #800fff;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.btn_next {
+    height: 67px;
+    width: 425px;
+    background: #00da76;
+    font-family: Silkscreen;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.333333px;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+}
+
+.copyright {
+    font-family: Fira Code;
+    font-style: normal;
+    font-weight: 450;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.333333px;
+  color: #60265b;
+  margin-top: 86px;
+}
+
+.colorSelectedBorder{
+  border: 5px solid #FFFFFF;
+}

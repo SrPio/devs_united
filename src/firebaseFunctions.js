@@ -27,7 +27,7 @@ export async function addPost(post) {
   try {
     await addDoc(collection(db, "posts"), post);
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error("Error al agregar el post: ", e);
     
   }
 }
@@ -47,5 +47,16 @@ export async function updatePost(id, newData) {
     await updateDoc(userRef, newData);
   } catch (e) {
     console.log("Error al actualizar el post", e);
+  }
+}
+
+
+//Para document user
+export async function addUser(user) {
+  try {
+    await addDoc(collection(db, "users"), user);
+  } catch (e) {
+    console.error("Error al agregar el usuario: ", e);
+    
   }
 }

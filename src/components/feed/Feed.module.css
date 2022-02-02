@@ -132,7 +132,6 @@ article {
 
   background: #2e132c;
   width: 605px;
-  
 }
 
 .autor {
@@ -213,5 +212,17 @@ article {
   cursor: pointer;
 }
 
-.deleteImg {
+.dateStyle {
+  font-family: Fira Code;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: -0.333333px;
+  color: #ffffff;
+  margin: 25px 0 0 12px;
+}
+
+.container_name_date {
+  display: flex;
 }
