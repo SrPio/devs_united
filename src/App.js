@@ -4,6 +4,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register_welcome/Register";
 import { useState } from "react";
 import Feed from "./components/feed/Feed";
+import ProfileUserA from "./components/profile_user_A/ProfileUserA";
 
 function App() {
   //let colors = ["pink" , "orange" , "yellow" , "green" , "blue", "purple"];
@@ -11,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      {isLoginVisible ? (
+      {/* {isLoginVisible ? (
         (
           <Login
             isLoginVisible={isLoginVisible}
@@ -20,8 +21,9 @@ function App() {
         )
       ) : (
         <Feed />
-      )}
-      {/*<Register isSelectedColor={isSelectedColor} setIsSelectedColor={setIsSelectedColor}/>*/}
+      )}*/}
+
+      <ProfileUserA />
     </div>
   );
 }
