@@ -27,6 +27,7 @@ header {
   -ms-border-radius: 100%;
   -o-border-radius: 100%;
   border: 3px solid #ffea5c;
+  cursor: pointer;
 }
 
 .logo {
@@ -191,7 +192,6 @@ article {
 
 .likesButton {
   border: none;
-  style: none;
   background-color: transparent;
   margin: 25px 0 26px;
 }
@@ -203,7 +203,6 @@ article {
 }
 
 .deleteButton {
-  style: none;
   background-color: transparent;
   width: 24px;
   height: 20px;

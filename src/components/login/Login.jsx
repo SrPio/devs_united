@@ -96,9 +96,7 @@ function Login({isLoginVisible, setIsLoginVisible}) {
     });
   };
 
-  const preventDefault = (e) => {
-    e.preventDefault();
-  }
+
 
   return (
     <>

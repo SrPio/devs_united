@@ -13,6 +13,7 @@ import {
 } from "../../firebaseFunctions";
 
 import { collection, onSnapshot } from "firebase/firestore";
+import ProfileUserA from "../profile_user_A/ProfileUserA";
 
 const INITIAL_FORM_DATA = {
   message: "",
@@ -23,11 +24,20 @@ const INITIAL_FORM_DATA = {
   postDate: "",
 };
 
-function Feed() {
-  const [posts, setPosts] = useState([]);
+
+function Feed({users, setUsers, 
+  showMyProfile, setShowMyProfile, 
+  posts, setPosts,
+  userLog, setUserLog,
+  generateUsername, likeUser,
+  handlerDelete}) {
+  
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
-  const [userLog, setUserLog] = useState(null);
-  const [users, setUsers] = useState([]);
+  
+  
+  
+
+  let userInfo = "";
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
@@ -112,20 +122,9 @@ function Feed() {
     });
   };
 
-  const handlerDelete = (e) => {
-    delPost(e.target.id).then((id) => {
-      const newPosts = posts.filter((post) => {
-        return post.id !== id;
-      });
-      setPosts(newPosts);
-    });
-  };
+  
 
-  const likeUser = (id, likes = 0) => {
-    updatePost(id, {
-      likes: likes + 1,
-    });
-  };
+  
 
   const obtenerFecha = () => {
     const fecha = new Date();
@@ -135,9 +134,9 @@ function Feed() {
     return fechaFormateada;
   };
 
-  const userInformation = () => {
+  const userInformation = (userInfo) => {
     users.map((user) => {
-      return {
+      return(userInfo = {
         usernameTag: user.username,
         email: user.email,
         name: user.name,
@@ -145,33 +144,20 @@ function Feed() {
         uid: user.uid,
         photo: user.photo,
         colorUI: user.colorUI,
-      };
-    });
-  };
-
-  const generateUsername = () => {
-    let username = "";
-    let userdata = "";
-    let postdata = "";
-    users.map((user) => {
-      return (userdata = {
-        usernameTag: user.username,
-        email: user.email,
       });
     });
-    posts.map((post) => {
-      return (postdata = { emailPost: post.email });
-    });
-
-    if (userdata.email === postdata.emailPost) {
-      username = userdata.usernameTag;
-    }
-
-    return username;
   };
 
+  
+
+
   return (
-    <div className={styles.feed}>
+  <>
+  {
+    showMyProfile ? (
+      <ProfileUserA posts={posts}/>
+    ) : (
+      <div className={styles.feed}>
       <header>
         {/* {userLog ? (
           <div className="user-profile">
@@ -184,13 +170,14 @@ function Feed() {
             Login con Google
           </button>
         )} */}
-        <div className={styles.titleBox}>
+        <div className={styles.titleBox} >
           {users.map((user) => {
             return (
               <img
                 src={user.photo}
                 alt="Profile pic"
                 className={styles.profilePic}
+                onClick={() => {setShowMyProfile(true)}}
               />
             );
           })}
@@ -265,6 +252,10 @@ function Feed() {
         })}
       </article>
     </div>
+    )
+  }
+    
+    </>
   );
 }
 
