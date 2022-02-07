@@ -14,6 +14,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const [userLog, setUserLog] = useState(null);
+  const [isLike, setIsLike] = useState(false);
 
   const generateUsername = () => {
     let username = "";
@@ -38,9 +39,17 @@ function App() {
 
 
   const likeUser = (id, likes = 0) => {
-    updatePost(id, {
-      likes: likes + 1,
-    });
+    if(isLike === true){
+      isLike(false);
+      updatePost(id, {
+        likes: likes - 1,
+      });
+    } else {
+      isLike(true);
+      updatePost(id, {
+        likes: likes + 1,
+      });
+    }
   };
 
   const handlerDelete = (e) => {
@@ -86,7 +95,9 @@ function App() {
             setShowMyProfile={setShowMyProfile}
             generateUsername={generateUsername}
             likeUser={likeUser}
-            handlerDelete={handlerDelete} />)
+            handlerDelete={handlerDelete}
+            isLike={isLike}
+            setIsLike={setIsLike} />)
       )}
 
       {/* <ProfileUserA /> */}
