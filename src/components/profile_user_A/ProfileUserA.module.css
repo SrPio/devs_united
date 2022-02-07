@@ -23,6 +23,7 @@ header {
   background: #150714;
   display: flex;
   justify-content: center;
+  border-bottom: 2px solid #60265B;
 }
 
 article {
