@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/login/Login";
@@ -5,7 +6,15 @@ import Register from "./components/register_welcome/Register";
 import { useState } from "react";
 import Feed from "./components/feed/Feed";
 import ProfileUserA from "./components/profile_user_A/ProfileUserA";
-import { updatePost, delPost } from "./firebaseFunctions";
+import { updatePost, delPost, updateUser } from "./firebaseFunctions";
+
+const INITIAL_FORM_DATA = {
+  email: "",
+  name: "",
+  username: "",
+  photo: "",
+  uid: "",
+};
 
 function App() {
   //let colors = ["pink" , "orange" , "yellow" , "green" , "blue", "purple"];
@@ -15,6 +24,10 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [userLog, setUserLog] = useState(null);
   const [isLike, setIsLike] = useState(false);
+
+  const [isSelectedColor, setIsSelectedColor] = useState("pink");
+
+  const [userName, setUserName] = useState("");
 
   const generateUsername = () => {
     let username = "";
@@ -38,16 +51,20 @@ function App() {
   };
 
 
-  const likeUser = (id, likes = 0) => {
-    if(isLike === true){
-      isLike(false);
+  const likeUser = (id, likes = 0, userId) => {
+    if (isLike === true) {
+      setIsLike(false);
       updatePost(id, {
         likes: likes - 1,
       });
+
     } else {
-      isLike(true);
+      setIsLike(true);
       updatePost(id, {
         likes: likes + 1,
+      });
+      updateUser(userId, {
+        likesList: [id]
       });
     }
   };
@@ -63,46 +80,62 @@ function App() {
 
   return (
     <div className="App">
-      {isLoginVisible ? (
-        (
-          <Login
-            isLoginVisible={isLoginVisible}
-            setIsLoginVisible={setIsLoginVisible}
-          />
-        )
-      ) : (
-        showMyProfile ? (
-          <ProfileUserA
-            showMyProfile={showMyProfile}
-            setShowMyProfile={setShowMyProfile}
-            isLoginVisible={isLoginVisible}
-            setIsLoginVisible={setIsLoginVisible}
-            users={users}
-            posts={posts}
-            userLog={userLog}
-            generateUsername={generateUsername}
-            likeUser={likeUser}
-            handlerDelete={handlerDelete}
-            />) :
-          (<Feed
-            users={users}
-            setUsers={setUsers}
-            posts={posts}
-            setPosts={setPosts}
-            userLog={userLog}
-            setUserLog={setUserLog}
-            showMyProfile={showMyProfile}
-            setShowMyProfile={setShowMyProfile}
-            generateUsername={generateUsername}
-            likeUser={likeUser}
-            handlerDelete={handlerDelete}
-            isLike={isLike}
-            setIsLike={setIsLike} />)
-      )}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={
 
-      {/* <ProfileUserA /> */}
-    </div>
-  );
+            <Login
+              setUserLog={setUserLog}
+            />
+          } />
+          <Route path="/perfil" element={
+
+            <ProfileUserA
+              showMyProfile={showMyProfile}
+              setShowMyProfile={setShowMyProfile}
+              isLoginVisible={isLoginVisible}
+              setIsLoginVisible={setIsLoginVisible}
+              users={users}
+              posts={posts}
+              userLog={userLog}
+              generateUsername={generateUsername}
+              likeUser={likeUser}
+              handlerDelete={handlerDelete}
+            />
+          } />
+          <Route path="/feed" element={
+            <Feed
+              users={users}
+              setUsers={setUsers}
+              posts={posts}
+              setPosts={setPosts}
+              userLog={userLog}
+              setUserLog={setUserLog}
+              showMyProfile={showMyProfile}
+              setShowMyProfile={setShowMyProfile}
+              generateUsername={generateUsername}
+              likeUser={likeUser}
+              handlerDelete={handlerDelete}
+              isLike={isLike}
+              setIsLike={setIsLike}
+            />
+          } />
+          <Route path="/register" element={
+            <Register
+              isSelectedColor={isSelectedColor}
+              setIsSelectedColor={setIsSelectedColor}
+              userName={userName}
+              setUserName={setUserName}
+              userLog={userLog}
+              setUsers={setUsers}
+            />
+          }>
+          </Route>
+        </Routes>
+      </BrowserRouter >
+    </div >
+
+  )
 }
 
 export default App;

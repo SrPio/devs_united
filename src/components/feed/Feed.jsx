@@ -14,6 +14,7 @@ import {
 
 import { collection, onSnapshot } from "firebase/firestore";
 import ProfileUserA from "../profile_user_A/ProfileUserA";
+import { Link } from "react-router-dom";
 
 const INITIAL_FORM_DATA = {
   message: "",
@@ -153,10 +154,9 @@ function Feed({users, setUsers,
 
   return (
   <>
-  {
-    showMyProfile ? (
-      <ProfileUserA posts={posts}/>
-    ) : (
+  
+      {/* <ProfileUserA posts={posts}/> */}
+    
       <div className={styles.feed}>
       <header>
         {/* {userLog ? (
@@ -171,16 +171,14 @@ function Feed({users, setUsers,
           </button>
         )} */}
         <div className={styles.titleBox} >
-          {users.map((user) => {
-            return (
-              <img
-                src={user.photo}
-                alt="Profile pic"
-                className={styles.profilePic}
-                onClick={() => {setShowMyProfile(true)}}
-              />
-            );
-          })}
+          <Link to="/perfil">
+          <img
+            src={userLog.photoURL}
+            alt="Profile pic"
+            className={styles.profilePic}
+            onClick={() => {setShowMyProfile(true)}}
+          />
+          </Link>
           <img
             src="./images/logo_small.svg"
             alt="Logo"
@@ -229,7 +227,7 @@ function Feed({users, setUsers,
                 <p className={styles.message}>{post.message}</p>
                 <button
                   className={styles.likesButton}
-                  onClick={() => likeUser(post.id, post.likes)}
+                  onClick={() => likeUser(post.id, post.likes, users.uid)}
                 >
                   <img
                     className={styles.likeImg}
@@ -252,8 +250,7 @@ function Feed({users, setUsers,
         })}
       </article>
     </div>
-    )
-  }
+
     
     </>
   );

@@ -19,7 +19,13 @@ export const db = getFirestore(app);
 //Autenticación
 export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
-export const loginConGoogle = () => signInWithPopup(auth, provider);
+export const loginConGoogle = (navigate) => {
+  try {
+    signInWithPopup(auth, provider).then(() => {navigate("/register")})
+  } catch (e) {
+    console.log(e);
+  }
+}
 export const logout = () => signOut(auth);
 
 
@@ -28,7 +34,7 @@ export async function addPost(post) {
     await addDoc(collection(db, "posts"), post);
   } catch (e) {
     console.error("Error al agregar el post: ", e);
-    
+
   }
 }
 
@@ -57,6 +63,15 @@ export async function addUser(user) {
     await addDoc(collection(db, "users"), user);
   } catch (e) {
     console.error("Error al agregar el usuario: ", e);
-    
+
+  }
+}
+
+export async function updateUser(id, newData) {
+  const userRef = doc(db, "users", id);
+  try {
+    await updateDoc(userRef, newData);
+  } catch (e) {
+    console.log("Error al actualizar el usuario", e);
   }
 }

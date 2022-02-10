@@ -2,72 +2,44 @@ import React, { useState, useEffect } from "react";
 import styles from "./Register.module.css";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, addUser } from "../../firebaseFunctions";
+import { Link, useNavigate } from "react-router-dom";
 
-const INITIAL_FORM_DATA = {
-  email: "",
-  name: "",
-  username: "",
-  photo: "",
-  uid: "",
-};
-
-function Register({ userLog }) {
-  const [isSelectedColor, setIsSelectedColor] = useState("pink");
+function Register({
+  userLog,
+  isSelectedColor,
+  setIsSelectedColor,
+  userName,
+  setUserName,
+  setUsers,
+}) {
+  const INITIAL_FORM_DATA = {
+    email: "",
+    name: "",
+    username: "",
+    photo: "",
+    uid: "",
+  };
   const [newUser, setNewUser] = useState(INITIAL_FORM_DATA);
-  const [users, setUsers] = useState([]);
-  const [userName, setUserName] = useState("");
-  
-  
-
-  useEffect(() => {
-    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
-      const usersData = snapshot.docs.map(
-        (doc) => {
-          return {
-            email: doc.data().email,
-            name: doc.data().name,
-            username: doc.data().username,
-            uid: doc.data().uid,
-            photo: doc.data().photo,
-          };
-        },
-        (error) => {
-          console.log(error, "Error en snapshot");
-        }
-      );
-      //console.log(usersData);
-      setUsers(usersData);
-      
-    });
-    /* const unsubscribeAuth = auth.onAuthStateChanged((user) => {
-      setUserLog(user);
-      console.log(user);
-    }); */
-     return () => {
-      unsub();
-      //unsubscribeAuth();
-    }; 
-  }, []);
-
-
+  const navigate = useNavigate();
   //Handlers
   const handleChange = (e) => {
-    setNewUser(() => {
-      return {
-        name: userLog.displayName,
-        username : userName,
-        email: userLog.email,
-        uid: userLog.uid,
-        photo: userLog.photoURL,
-      };
-    });
+    setUserName(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addUser(newUser).then(() => {
+    const userdata = {
+      name: userLog.displayName,
+      username: userName,
+      email: userLog.email,
+      uid: userLog.uid,
+      photo: userLog.photoURL,
+      colorUI: isSelectedColor,
+    };
+    addUser(userdata).then(() => {
       setNewUser(INITIAL_FORM_DATA);
-    });
+    })
+    navigate("/feed")
   };
 
   return (
@@ -79,60 +51,78 @@ function Register({ userLog }) {
         <h1 className={styles.principal_title}>
           WELCOME <span>NAME!</span>
         </h1>
-        <form onSubmit={handleSubmit}>
-        <input type="" placeholder="Type your username" onChange={handleChange}/>
-        <h1 className={styles.subtitle}>Select your favorite color</h1>
-        <div className={styles.colors}>
-          <button
-            className={`${
-              isSelectedColor === "pink" ? styles.colorSelectedBorder : ""
-            } ${styles.color_1}`}
-            onClick={() => {
-              setIsSelectedColor("pink");
-            }}
-          ></button>
-          <button
-            className={`${
-              isSelectedColor === "orange" ? styles.colorSelectedBorder : ""
-            } ${styles.color_2}`}
-            onClick={() => {
-              setIsSelectedColor("orange");
-            }}
-          ></button>
-          <button
-            className={`${
-              isSelectedColor === "yellow" ? styles.colorSelectedBorder : ""
-            } ${styles.color_3}`}
-            onClick={() => {
-              setIsSelectedColor("yellow");
-            }}
-          ></button>
-          <button
-            className={`${
-              isSelectedColor === "green" ? styles.colorSelectedBorder : ""
-            } ${styles.color_4}`}
-            onClick={() => {
-              setIsSelectedColor("green");
-            }}
-          ></button>
-          <button
-            className={`${
-              isSelectedColor === "blue" ? styles.colorSelectedBorder : ""
-            } ${styles.color_5}`}
-            onClick={() => {
-              setIsSelectedColor("blue");
-            }}
-          ></button>
-          <button
-            className={`${
-              isSelectedColor === "purple" ? styles.colorSelectedBorder : ""
-            } ${styles.color_6}`}
-            onClick={() => {
-              setIsSelectedColor("purple");
-            }}
-          ></button>
-        </div>
-        <button className={styles.btn_next}>CONTINUE</button>
+        <form>
+          <input
+            type=""
+            placeholder="Type your username"
+            onChange={handleChange}
+          />
+          <h1 className={styles.subtitle}>Select your favorite color</h1>
+          <div className={styles.colors}>
+            <button
+              type="button"
+              className={`${
+                isSelectedColor === "pink" ? styles.colorSelectedBorder : ""
+              } ${styles.color_1}`}
+              onClick={() => {
+                setIsSelectedColor("pink");
+              }}
+            ></button>
+            <button
+              type="button"
+              className={`${
+                isSelectedColor === "orange" ? styles.colorSelectedBorder : ""
+              } ${styles.color_2}`}
+              onClick={() => {
+                setIsSelectedColor("orange");
+              }}
+            ></button>
+            <button
+              type="button"
+              className={`${
+                isSelectedColor === "yellow" ? styles.colorSelectedBorder : ""
+              } ${styles.color_3}`}
+              onClick={() => {
+                setIsSelectedColor("yellow");
+              }}
+            ></button>
+            <button
+              type="button"
+              className={`${
+                isSelectedColor === "green" ? styles.colorSelectedBorder : ""
+              } ${styles.color_4}`}
+              onClick={() => {
+                setIsSelectedColor("green");
+              }}
+            ></button>
+            <button
+              type="button"
+              className={`${
+                isSelectedColor === "blue" ? styles.colorSelectedBorder : ""
+              } ${styles.color_5}`}
+              onClick={() => {
+                setIsSelectedColor("blue");
+              }}
+            ></button>
+            <button
+              type="button"
+              className={`${
+                isSelectedColor === "purple" ? styles.colorSelectedBorder : ""
+              } ${styles.color_6}`}
+              onClick={() => {
+                setIsSelectedColor("purple");
+              }}
+            ></button>
+          </div>
+          
+            <button
+              type="button"
+              className={styles.btn_next}
+              onClick={handleSubmit}
+            >
+              CONTINUE
+            </button>
+          
         </form>
         <h1 className={styles.copyright}>
           © 2020 Devs_United - <span>BETA</span>
