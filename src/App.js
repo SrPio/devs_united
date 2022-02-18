@@ -7,6 +7,8 @@ import { useState } from "react";
 import Feed from "./components/feed/Feed";
 import ProfileUserA from "./components/profile_user_A/ProfileUserA";
 import { updatePost, delPost, updateUser } from "./firebaseFunctions";
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 const INITIAL_FORM_DATA = {
   email: "",
@@ -50,21 +52,15 @@ function App() {
     return username;
   };
 
-
+  //! IMPORTANTE: Este metodo de likeUser está fallando, revisar la proxima clase.
   const likeUser = (id, likes = 0, userId) => {
-    if (isLike === true) {
-      setIsLike(false);
-      updatePost(id, {
-        likes: likes - 1,
-      });
-
+    let indexLikes = posts.likesList.indexOf(userId); //! no está funcionando porque en posts.likeList devuelve undefined
+    console.log(`Esto es indexLikes: ${posts.likesList}`);
+    if (indexLikes !== -1) {
+      setPosts(posts.likesList.splice(indexLikes, 1))
     } else {
-      setIsLike(true);
       updatePost(id, {
-        likes: likes + 1,
-      });
-      updateUser(userId, {
-        likesList: [id]
+        likesList: [userId]
       });
     }
   };
@@ -128,6 +124,17 @@ function App() {
               setUserName={setUserName}
               userLog={userLog}
               setUsers={setUsers}
+            />
+          }>
+          </Route>
+          <Route path="/posts" element={
+            <Posts
+              posts={posts}
+              setPosts={setPosts}
+              generateUsername={generateUsername}
+              likeUser={likeUser}
+              userLog={userLog}
+              handlerDelete={handlerDelete}
             />
           }>
           </Route>

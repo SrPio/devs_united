@@ -15,6 +15,7 @@ import {
 import { collection, onSnapshot } from "firebase/firestore";
 import ProfileUserA from "../profile_user_A/ProfileUserA";
 import { Link } from "react-router-dom";
+import Posts from "../posts/Posts";
 
 const INITIAL_FORM_DATA = {
   message: "",
@@ -23,20 +24,23 @@ const INITIAL_FORM_DATA = {
   autor: "",
   photo: "",
   postDate: "",
+  likesList: [],
 };
 
-
-function Feed({users, setUsers, 
-  showMyProfile, setShowMyProfile, 
-  posts, setPosts,
-  userLog, setUserLog,
-  generateUsername, likeUser,
-  handlerDelete}) {
-  
+function Feed({
+  users,
+  setUsers,
+  showMyProfile,
+  setShowMyProfile,
+  posts,
+  setPosts,
+  userLog,
+  setUserLog,
+  generateUsername,
+  likeUser,
+  handlerDelete,
+}) {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
-  
-  
-  
 
   let userInfo = "";
 
@@ -47,7 +51,7 @@ function Feed({users, setUsers,
           return {
             message: doc.data().message,
             id: doc.id,
-            likes: doc.data().likes,
+            likesList: doc.data().likesList,
             autor: doc.data().autor,
             email: doc.data().email,
             uid: doc.data().uid,
@@ -62,13 +66,13 @@ function Feed({users, setUsers,
       //console.log(postsData);
       setPosts(postsData);
     });
-    const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+    /* const unsubscribeAuth = auth.onAuthStateChanged((user) => {
       setUserLog(user);
       console.log(user);
-    });
+    }); */
     return () => {
       unsub();
-      unsubscribeAuth();
+      //unsubscribeAuth();
     };
   }, []);
 
@@ -113,6 +117,7 @@ function Feed({users, setUsers,
         autor: userLog.displayName,
         photo: userLog.photoURL,
         postDate: obtenerFecha(),
+        likesList: [],
       };
     });
   };
@@ -122,10 +127,6 @@ function Feed({users, setUsers,
       setNewPost(INITIAL_FORM_DATA);
     });
   };
-
-  
-
-  
 
   const obtenerFecha = () => {
     const fecha = new Date();
@@ -137,7 +138,7 @@ function Feed({users, setUsers,
 
   const userInformation = (userInfo) => {
     users.map((user) => {
-      return(userInfo = {
+      return (userInfo = {
         usernameTag: user.username,
         email: user.email,
         name: user.name,
@@ -149,17 +150,13 @@ function Feed({users, setUsers,
     });
   };
 
-  
-
-
   return (
-  <>
-  
+    <>
       {/* <ProfileUserA posts={posts}/> */}
-    
+
       <div className={styles.feed}>
-      <header>
-        {/* {userLog ? (
+        <header>
+          {/* {userLog ? (
           <div className="user-profile">
             <img className="user-profile-pic" src={userLog.photoURL} alt="" />
             <p>¡Hola {userLog.displayName}!</p>
@@ -170,88 +167,91 @@ function Feed({users, setUsers,
             Login con Google
           </button>
         )} */}
-        <div className={styles.titleBox} >
-          <Link to="/perfil">
-          <img
-            src={userLog.photoURL}
-            alt="Profile pic"
-            className={styles.profilePic}
-            onClick={() => {setShowMyProfile(true)}}
-          />
-          </Link>
-          <img
-            src="./images/logo_small.svg"
-            alt="Logo"
-            className={styles.logo}
-          />
-
-          <img src="./images/title.svg" alt="title" className={styles.title} />
-        </div>
-      </header>
-      <div className={styles.postSection}>
-        <div className={styles.internalPostSection}>
-          {users.map((user) => {
-            return (
+          <div className={styles.titleBox}>
+            <Link to="/perfil">
               <img
-                className={styles.imginternalPostSection}
-                src={user.photo}
-                alt=""
+                src={userLog.photoURL}
+                alt="Profile pic"
+                className={styles.profilePic}
+                onClick={() => {
+                  setShowMyProfile(true);
+                }}
               />
-            );
-          })}
-          <form onSubmit={handleSubmit} className={styles.postArea}>
-            <textarea
-              className={styles.inputPost}
-              placeholder="What’s happening?"
-              onChange={handleChange}
-              value={newPost.message}
+            </Link>
+            <img
+              src="./images/logo_small.svg"
+              alt="Logo"
+              className={styles.logo}
             />
-            <h1 className={styles.limitText}>200 max.</h1>
-            <button /*disabled="disabled"*/ className={styles.postButton}>
-              <img src="./images/button_post_off.svg" alt="" />
-            </button>
-          </form>
-        </div>
-      </div>
-      <article>
-        {console.log(users)}
-        {posts.map((post) => {
-          return (
-            <div className={styles.post} key={post.id}>
-              <img className={styles.postPic} src={post.photo} alt="" />
-              <div className={styles.contentPost}>
-                <div className={styles.container_name_date}>
-                  <p className={styles.autor}>{generateUsername()}</p>
-                  <p className={styles.dateStyle}> {post.postDate}</p>
-                </div>
-                <p className={styles.message}>{post.message}</p>
-                <button
-                  className={styles.likesButton}
-                  onClick={() => likeUser(post.id, post.likes, users.uid)}
-                >
-                  <img
-                    className={styles.likeImg}
-                    height="13px"
-                    src="./images/likeOn.svg"
-                    alt=""
-                  />
-                  <span className={styles.likesNumber}>
-                    {post.likes ? post.likes : 0}
-                  </span>
-                </button>
-              </div>
-              {post.uid === userLog?.uid ? (
-                <button onClick={handlerDelete} className={styles.deleteButton}>
-                  <img id={post.id} src="./images/delete.svg" alt="" />
-                </button>
-              ) : null}
-            </div>
-          );
-        })}
-      </article>
-    </div>
 
-    
+            <img
+              src="./images/title.svg"
+              alt="title"
+              className={styles.title}
+            />
+          </div>
+        </header>
+        <div className={styles.postSection}>
+          <div className={styles.internalPostSection}>
+            <img
+              className={styles.imginternalPostSection}
+              src={userLog.photoURL}
+              alt=""
+            />
+            <form onSubmit={handleSubmit} className={styles.postArea}>
+              <textarea
+                className={styles.inputPost}
+                placeholder="What’s happening?"
+                onChange={handleChange}
+                value={newPost.message}
+              />
+              <h1 className={styles.limitText}>200 max.</h1>
+              <button /*disabled="disabled"*/ className={styles.postButton}>
+                <img src="./images/button_post_off.svg" alt="" />
+              </button>
+            </form>
+          </div>
+        </div>
+        <article>
+          {/* {posts.map((post) => {
+            return (
+              <div className={styles.post} key={post.id}>
+                <img className={styles.postPic} src={post.photo} alt="" />
+                <div className={styles.contentPost}>
+                  <div className={styles.container_name_date}>
+                    <p className={styles.autor}>{generateUsername()}</p>
+                    <p className={styles.dateStyle}> {post.postDate}</p>
+                  </div>
+                  <p className={styles.message}>{post.message}</p>
+                  <button
+                    className={styles.likesButton}
+                    onClick={() => likeUser(post.id, post.likes, userLog.uid)}
+                  >
+                    <img
+                      className={styles.likeImg}
+                      height="13px"
+                      src="./images/likeOn.svg"
+                      alt=""
+                    />
+                    <span className={styles.likesNumber}>
+                      {post.likes ? post.likes : 0}
+                    </span>
+                  </button>
+                </div>
+                {post.uid === userLog?.uid ? (
+                  <button
+                    onClick={handlerDelete}
+                    className={styles.deleteButton}
+                  >
+                    <img id={post.id} src="./images/delete.svg" alt="" />
+                  </button>
+                ) : null}
+              </div>
+            );
+          })} */}
+          <Posts />
+        </article>
+      </div>
     </>
   );
 }
