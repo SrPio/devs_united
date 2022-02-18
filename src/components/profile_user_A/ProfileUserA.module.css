@@ -61,6 +61,7 @@ article {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  margin: 8px 16px 8px;
 }
 
 .profilePicStyle {

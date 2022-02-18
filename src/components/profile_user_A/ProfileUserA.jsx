@@ -24,16 +24,16 @@ function ProfileUserA({
     <div className={styles.profileA}>
       <header>
         <div className={styles.titleBox}>
-          <div className={styles.stylesButtonBack}>
-            <img
-              src="./images/back.svg"
-              alt="back"
-              className={styles.backStyle}
-            />
-            <Link to="/feed">
+          <Link to="/feed">
+            <div className={styles.stylesButtonBack}>
+              <img
+                src="./images/back.svg"
+                alt="back"
+                className={styles.backStyle}
+              />
               <h1 className={styles.usernameHeader}>username</h1>
-            </Link>
-          </div>
+            </div>
+          </Link>
           <Link to="/">
             <button className={styles.btn_logout}>
               <img src="./images/logout.svg" alt="" onClick={logout} />
@@ -49,10 +49,7 @@ function ProfileUserA({
             alt="profile_pic"
             className={styles.profilePicStyle}
           />
-
-          {users.map((user) => {
-            return <h1 className={styles.usernameStyle}>{user.username}</h1>;
-          })}
+          <h1 className={styles.usernameStyle}>{users.username}</h1>;
           <div className={styles.tabButtons}>
             <button className={styles.postButtonSelected}>POSTS</button>
             <button className={styles.favButtonUnselected}>FAVORITES</button>
