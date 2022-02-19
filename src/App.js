@@ -53,17 +53,7 @@ function App() {
   };
 
   //! IMPORTANTE: Este metodo de likeUser está fallando, revisar la proxima clase.
-  const likeUser = (id, likes = 0, userId) => {
-    let indexLikes = posts.likesList.indexOf(userId); //! no está funcionando porque en posts.likeList devuelve undefined
-    console.log(`Esto es indexLikes: ${posts.likesList}`);
-    if (indexLikes !== -1) {
-      setPosts(posts.likesList.splice(indexLikes, 1))
-    } else {
-      updatePost(id, {
-        likesList: [userId]
-      });
-    }
-  };
+
 
   const handlerDelete = (e) => {
     delPost(e.target.id).then((id) => {
@@ -82,6 +72,8 @@ function App() {
 
             <Login
               setUserLog={setUserLog}
+              userName={userName}
+              userLog={userLog}
             />
           } />
           <Route path="/perfil" element={
@@ -95,8 +87,9 @@ function App() {
               posts={posts}
               userLog={userLog}
               generateUsername={generateUsername}
-              likeUser={likeUser}
+              // likeUser={likeUser}
               handlerDelete={handlerDelete}
+              username={userName}
             />
           } />
           <Route path="/feed" element={
@@ -110,7 +103,7 @@ function App() {
               showMyProfile={showMyProfile}
               setShowMyProfile={setShowMyProfile}
               generateUsername={generateUsername}
-              likeUser={likeUser}
+              userName={userName}
               handlerDelete={handlerDelete}
               isLike={isLike}
               setIsLike={setIsLike}
@@ -127,18 +120,9 @@ function App() {
             />
           }>
           </Route>
-          <Route path="/posts" element={
-            <Posts
-              posts={posts}
-              setPosts={setPosts}
-              generateUsername={generateUsername}
-              likeUser={likeUser}
-              userLog={userLog}
-              handlerDelete={handlerDelete}
-            />
-          }>
-          </Route>
+
         </Routes>
+        {console.log(posts)}
       </BrowserRouter >
     </div >
 

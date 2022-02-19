@@ -9,16 +9,17 @@ import { db, addUser } from "../../firebaseFunctions";
 
 const INITIAL_FORM_DATA = {
   email: "",
-  name: "",
   username: "",
   photo: "",
   uid: "",
   colorUI: "",
 };
 
-function Login({ setUserLog }) {
+function Login({ setUserLog, userName, userLog }) {
   //const [userLog, setUserLog] = useState(null);
   const navigate = useNavigate();
+
+  const [newUser, setNewUser] = useState(INITIAL_FORM_DATA);
 
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
@@ -30,6 +31,28 @@ function Login({ setUserLog }) {
       unsubscribeAuth();
     };
   }, []);
+
+  //! cree estas 2 funciones (y sus states correspondientes) para subir user a la bd
+  const handleChange = (e) => {
+    setNewUser(() => {
+      return {
+        email: userLog.email,
+        uid: userLog.uid,
+        username: userName,
+        photo: userLog.photoURL,
+        colorUI: "",
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addUser(newUser).then(() => {
+      setNewUser(INITIAL_FORM_DATA);
+    });
+  };
+
+  //! - - - Todavía no los he implementado. - - -
 
   return (
     <>

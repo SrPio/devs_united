@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ProfileUserA.module.css";
 import { logout } from "../../firebaseFunctions";
 import { Link } from "react-router-dom";
+import Posts from "../posts/Posts";
 
 function ProfileUserA({
   users,
@@ -12,13 +13,17 @@ function ProfileUserA({
   userLog,
   posts,
   generateUsername,
-  likeUser,
+  //likeUser,
   handlerDelete,
+  username,
 }) {
   const logoutUser = () => {
     return logout, setIsLoginVisible(true);
   };
 
+  const misPosts = posts.filter((post) => {
+    return post.uid === userLog.uid;
+  });
   console.log("Profile esto es users" + users);
   return (
     <div className={styles.profileA}>
@@ -49,7 +54,7 @@ function ProfileUserA({
             alt="profile_pic"
             className={styles.profilePicStyle}
           />
-          <h1 className={styles.usernameStyle}>{users.username}</h1>;
+          <h1 className={styles.usernameStyle}>{username}</h1>;
           <div className={styles.tabButtons}>
             <button className={styles.postButtonSelected}>POSTS</button>
             <button className={styles.favButtonUnselected}>FAVORITES</button>
@@ -57,44 +62,14 @@ function ProfileUserA({
         </div>
       </div>
       <article>
-        {posts.map((post) => {
-          return (
-            <div className={styles.post} key={post.id}>
-              {post.uid === userLog?.uid ? (
-                <>
-                  <img className={styles.postPic} src={post.photo} alt="" />
-                  <div className={styles.contentPost}>
-                    <div className={styles.container_name_date}>
-                      <p className={styles.autor}>{generateUsername()}</p>
-                      <p className={styles.dateStyle}> {post.postDate}</p>
-                    </div>
-                    <p className={styles.message}>{post.message}</p>
-                    <button
-                      className={styles.likesButton}
-                      onClick={() => likeUser(post.id, post.likes)}
-                    >
-                      <img
-                        className={styles.likeImg}
-                        height="13px"
-                        src="./images/likeOn.svg"
-                        alt=""
-                      />
-                      <span className={styles.likesNumber}>
-                        {post.likes ? post.likes : 0}
-                      </span>
-                    </button>
-                  </div>
-                  <button
-                    onClick={handlerDelete}
-                    className={styles.deleteButton}
-                  >
-                    <img id={post.id} src="./images/delete.svg" alt="" />
-                  </button>
-                </>
-              ) : null}
-            </div>
-          );
-        })}
+        {}
+        <Posts
+          posts={misPosts}
+          setPosts
+          generateUsername={generateUsername}
+          userLog={userLog}
+          handlerDelete={handlerDelete}
+        />
       </article>
     </div>
   );

@@ -4,7 +4,8 @@ import {
   addDoc,
   deleteDoc,
   doc,
-  updateDoc
+  updateDoc,
+  setDoc
 } from "firebase/firestore";
 import { app } from "./firebase";
 import {
@@ -21,7 +22,7 @@ export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
 export const loginConGoogle = (navigate) => {
   try {
-    signInWithPopup(auth, provider).then(() => {navigate("/register")})
+    signInWithPopup(auth, provider).then(() => { navigate("/register") })
   } catch (e) {
     console.log(e);
   }
@@ -31,7 +32,9 @@ export const logout = () => signOut(auth);
 
 export async function addPost(post) {
   try {
-    await addDoc(collection(db, "posts"), post);
+    const reference = doc(collection(db, "posts"));
+    const postData = { ...post, id: reference.id }
+    await setDoc(reference, postData);
   } catch (e) {
     console.error("Error al agregar el post: ", e);
 
@@ -48,9 +51,8 @@ export async function delPost(id) {
 }
 
 export async function updatePost(id, newData) {
-  const userRef = doc(db, "posts", id);
   try {
-    await updateDoc(userRef, newData);
+    await updateDoc(id, newData);
   } catch (e) {
     console.log("Error al actualizar el post", e);
   }
@@ -60,9 +62,11 @@ export async function updatePost(id, newData) {
 //Para document user
 export async function addUser(user) {
   try {
-    await addDoc(collection(db, "users"), user);
+    const reference = doc(collection(db, "users"));
+    const userData = { ...user, id: reference.id }
+    await setDoc(reference, userData);
   } catch (e) {
-    console.error("Error al agregar el usuario: ", e);
+    console.error("Error al agregar el user: ", e);
 
   }
 }

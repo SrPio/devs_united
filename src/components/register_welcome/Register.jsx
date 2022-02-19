@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Register.module.css";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db, addUser } from "../../firebaseFunctions";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -38,9 +38,18 @@ function Register({
     };
     addUser(userdata).then(() => {
       setNewUser(INITIAL_FORM_DATA);
-    })
-    navigate("/feed")
+    });
+    navigate("/feed");
   };
+
+  useEffect(async () => {
+    const userRef = doc(db, "users", userLog.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      navigate("/feed");
+    }
+  }, []);
 
   return (
     <div className={styles.register}>
@@ -114,15 +123,14 @@ function Register({
               }}
             ></button>
           </div>
-          
-            <button
-              type="button"
-              className={styles.btn_next}
-              onClick={handleSubmit}
-            >
-              CONTINUE
-            </button>
-          
+
+          <button
+            type="button"
+            className={styles.btn_next}
+            onClick={handleSubmit}
+          >
+            CONTINUE
+          </button>
         </form>
         <h1 className={styles.copyright}>
           © 2020 Devs_United - <span>BETA</span>

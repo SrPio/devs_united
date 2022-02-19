@@ -12,7 +12,7 @@ function Posts({
 }) {
   return (
     <>
-      {/* {posts.length > 0 &&
+      {posts.length > 0 &&
         posts.map((post) => {
           return (
             <Post
@@ -24,8 +24,7 @@ function Posts({
               handlerDelete={handlerDelete}
             />
           );
-        })} */}
-      {console.log(posts)}
+        })}
     </>
   );
 }
