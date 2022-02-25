@@ -42,15 +42,6 @@ function Register({
     navigate("/feed");
   };
 
-  useEffect(async () => {
-    const userRef = doc(db, "users", userLog.uid);
-    const userSnap = await getDoc(userRef);
-
-    if (userSnap.exists()) {
-      navigate("/feed");
-    }
-  }, []);
-
   return (
     <div className={styles.register}>
       <div className={styles.container_left}>

@@ -15,7 +15,7 @@ const INITIAL_FORM_DATA = {
   colorUI: "",
 };
 
-function Login({ setUserLog, userName, userLog }) {
+function Login({ setUserLog, userName, userLog, setUsers, users }) {
   //const [userLog, setUserLog] = useState(null);
   const navigate = useNavigate();
 
@@ -32,28 +32,6 @@ function Login({ setUserLog, userName, userLog }) {
     };
   }, []);
 
-  //! cree estas 2 funciones (y sus states correspondientes) para subir user a la bd
-  const handleChange = (e) => {
-    setNewUser(() => {
-      return {
-        email: userLog.email,
-        uid: userLog.uid,
-        username: userName,
-        photo: userLog.photoURL,
-        colorUI: "",
-      };
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addUser(newUser).then(() => {
-      setNewUser(INITIAL_FORM_DATA);
-    });
-  };
-
-  //! - - - Todavía no los he implementado. - - -
-
   return (
     <>
       <button onClick={logout}>Log out</button>
@@ -63,6 +41,7 @@ function Login({ setUserLog, userName, userLog }) {
         <p>¡Hola {userLog.displayName}!</p>
       </div> */}
 
+      {console.log(users)}
       <div className={styles.login}>
         <div className={styles.container_left}>
           <img src="./images/logo.svg" alt="" />

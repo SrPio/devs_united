@@ -52,7 +52,7 @@ function App() {
     return username;
   };
 
-  //! IMPORTANTE: Este metodo de likeUser está fallando, revisar la proxima clase.
+
 
 
   const handlerDelete = (e) => {
@@ -74,6 +74,8 @@ function App() {
               setUserLog={setUserLog}
               userName={userName}
               userLog={userLog}
+              setUsers={setUsers}
+              users={users}
             />
           } />
           <Route path="/perfil" element={

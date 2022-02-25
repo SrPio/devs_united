@@ -5,7 +5,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
-  setDoc
+  setDoc, getDoc
 } from "firebase/firestore";
 import { app } from "./firebase";
 import {
@@ -22,7 +22,11 @@ export const auth = getAuth();
 export const provider = new GoogleAuthProvider();
 export const loginConGoogle = (navigate) => {
   try {
-    signInWithPopup(auth, provider).then(() => { navigate("/register") })
+    signInWithPopup(auth, provider).then(
+      (userData) => {
+        getOneUser(navigate, userData.user.uid);
+
+      })
   } catch (e) {
     console.log(e);
   }
@@ -62,9 +66,8 @@ export async function updatePost(id, newData) {
 //Para document user
 export async function addUser(user) {
   try {
-    const reference = doc(collection(db, "users"));
-    const userData = { ...user, id: reference.id }
-    await setDoc(reference, userData);
+    const reference = doc(db, "users", user.uid);
+    await setDoc(reference, user);
   } catch (e) {
     console.error("Error al agregar el user: ", e);
 
@@ -77,5 +80,15 @@ export async function updateUser(id, newData) {
     await updateDoc(userRef, newData);
   } catch (e) {
     console.log("Error al actualizar el usuario", e);
+  }
+}
+
+async function getOneUser(navigate, id) {
+  const userRef = doc(db, "users", id);
+  const userSnap = await getDoc(userRef);
+  if (userSnap.exists()) {
+    navigate("/feed")
+  } else {
+    navigate("/register")
   }
 }
