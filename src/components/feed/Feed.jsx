@@ -190,7 +190,7 @@ function Feed({
                 placeholder="What’s happening?"
                 onChange={handleChange}
                 value={newPost.message}
-                maxlength="200"
+                maxLength="200"
               />
               <h1 className={styles.limitText}>200 max.</h1>
               <button className={styles.postButton}>
