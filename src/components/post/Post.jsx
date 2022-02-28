@@ -32,7 +32,7 @@ function Post({ generateUsername, userLog, handlerDelete, post }) {
         <img className={styles.postPic} src={post.photo} alt="" />
         <div className={styles.contentPost}>
           <div className={styles.container_name_date}>
-            <p className={styles.autor}>{post.username}</p>
+            <p className={styles.autor}>{post.email}</p>
             <p className={styles.dateStyle}> {post.postDate}</p>
           </div>
           <p className={styles.message}>{post.message}</p>

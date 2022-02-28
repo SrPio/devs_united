@@ -91,7 +91,7 @@ function App() {
               generateUsername={generateUsername}
               // likeUser={likeUser}
               handlerDelete={handlerDelete}
-              username={userName}
+              userName={userName}
             />
           } />
           <Route path="/feed" element={
@@ -109,6 +109,7 @@ function App() {
               handlerDelete={handlerDelete}
               isLike={isLike}
               setIsLike={setIsLike}
+              setUserName={setUserName}
             />
           } />
           <Route path="/register" element={

@@ -92,3 +92,13 @@ async function getOneUser(navigate, id) {
     navigate("/register")
   }
 }
+
+export async function getUserUsername(id) {
+  const userRef = doc(db, "users", id);
+  const userSnap = await getDoc(userRef);
+  if (userSnap.exists()) {
+    return userSnap.data().username;
+  } else {
+    return null;
+  }
+}

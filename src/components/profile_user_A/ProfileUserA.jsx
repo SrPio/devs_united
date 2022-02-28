@@ -15,7 +15,7 @@ function ProfileUserA({
   generateUsername,
   //likeUser,
   handlerDelete,
-  username,
+  userName,
 }) {
   const logoutUser = () => {
     return logout, setIsLoginVisible(true);
@@ -36,7 +36,7 @@ function ProfileUserA({
                 alt="back"
                 className={styles.backStyle}
               />
-              <h1 className={styles.usernameHeader}>username</h1>
+              <h1 className={styles.usernameHeader}>back</h1>
             </div>
           </Link>
           <Link to="/">
@@ -54,7 +54,7 @@ function ProfileUserA({
             alt="profile_pic"
             className={styles.profilePicStyle}
           />
-          <h1 className={styles.usernameStyle}>{username}</h1>;
+          <h1 className={styles.usernameStyle}>{userLog.email}</h1>;
           <div className={styles.tabButtons}>
             <button className={styles.postButtonSelected}>POSTS</button>
             <button className={styles.favButtonUnselected}>FAVORITES</button>

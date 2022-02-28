@@ -141,12 +141,10 @@ article {
   font-style: normal;
   font-weight: bold;
   margin: 26px 0 17px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 20px;
-  color: #2e132c;
+  color: #ffea5c;
   letter-spacing: -0.333333px;
-  -webkit-box-shadow: inset 0px 0px 0px 10px #ffea5c, 0px 0px 0px 1px #ffea5c;
-  box-shadow: inset 0px 0px 0px 10px #ffea5c, 0px 0px 0px 1px #ffea5c;
 }
 
 .message {

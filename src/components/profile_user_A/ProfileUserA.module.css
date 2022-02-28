@@ -23,7 +23,7 @@ header {
   background: #150714;
   display: flex;
   justify-content: center;
-  border-bottom: 2px solid #60265B;
+  border-bottom: 2px solid #60265b;
 }
 
 article {
@@ -76,7 +76,7 @@ article {
   font-family: Silkscreen;
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 30px;
   letter-spacing: -0.333333px;
   margin-bottom: 35px;
@@ -103,7 +103,6 @@ article {
   line-height: 24px;
   letter-spacing: -0.333333px;
   color: #150714;
-  
 }
 
 .favButtonUnselected {
@@ -225,4 +224,3 @@ article {
   margin-top: 26px;
   cursor: pointer;
 }
-

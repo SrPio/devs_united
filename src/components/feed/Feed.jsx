@@ -10,6 +10,7 @@ import {
   auth,
   loginConGoogle,
   logout,
+  getUserUsername,
 } from "../../firebaseFunctions";
 
 import { collection, doc, onSnapshot } from "firebase/firestore";
@@ -37,6 +38,7 @@ function Feed({
   generateUsername,
   handlerDelete,
   userName,
+  setUserName,
 }) {
   const [newPost, setNewPost] = useState(INITIAL_FORM_DATA);
 
@@ -105,6 +107,13 @@ function Feed({
     };
   }, []);
 
+  //! Implementación para el username nuevo
+  /* useEffect(() => {
+    setUserName((userData) => {
+      getUserUsername(userData.user.uid);
+    });
+  }, []);
+ */
   //Handlers
   const handleChange = (e) => {
     setNewPost(() => {
