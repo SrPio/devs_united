@@ -18,7 +18,6 @@ header {
 }
 
 .postSection {
-  /* height: 218px; */
   width: 100%;
   background: #150714;
   display: flex;
@@ -164,9 +163,6 @@ article {
   line-height: 20px;
   color: #ffea5c;
   letter-spacing: -0.333333px;
-
-  /*-webkit-text-stroke: 2px #FFEA5C;
-  color: transparent; */
 }
 
 .dateStyle {

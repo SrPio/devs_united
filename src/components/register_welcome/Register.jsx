@@ -125,7 +125,6 @@ function Register({
         </form>
         <h1 className={styles.copyright}>
           © 2020 Devs_United - <span>BETA</span>
-          {/* <img className="user-profile-pic" src={userLog.photoURL} alt="" /> */}
         </h1>
       </div>
     </div>

@@ -28,7 +28,7 @@ export const loginConGoogle = (navigate) => {
 
       })
   } catch (e) {
-    console.log(e);
+    console.log("Error en autenticación " + e);
   }
 }
 export const logout = () => signOut(auth);

@@ -24,7 +24,6 @@ function ProfileUserA({
   const misPosts = posts.filter((post) => {
     return post.uid === userLog.uid;
   });
-  console.log("Profile esto es users" + users);
 
   return (
     <div className={styles.profileA}>

@@ -12,7 +12,6 @@ function Post({ generateUsername, userLog, handlerDelete, post }) {
     const postReference = doc(db, "posts", post.id);
     if (indexLikes !== -1) {
       let newLikeList = post.likesList.filter((like) => like !== userId);
-      console.log(newLikeList);
       updateDoc(postReference, {
         likesList: [...newLikeList],
       });
@@ -22,12 +21,10 @@ function Post({ generateUsername, userLog, handlerDelete, post }) {
         likesList: likesExtra,
       });
     }
-    //console.log(post.likesList, indexLikes, newLikeList);
   };
 
   return (
     <>
-      {console.log(post)}
       <div className={styles.post}>
         <img className={styles.postPic} src={post.photo} alt="" />
         <div className={styles.contentPost}>

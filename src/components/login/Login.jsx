@@ -24,7 +24,6 @@ function Login({ setUserLog, userName, userLog, setUsers, users }) {
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
       setUserLog(user);
-      /* console.log(user); */
     });
     return () => {
       // unsub();
@@ -34,14 +33,7 @@ function Login({ setUserLog, userName, userLog, setUsers, users }) {
 
   return (
     <>
-      <button onClick={logout}>Log out</button>
-
-      {/* <div className="user-profile">
-        <img className="user-profile-pic" src={userLog.photoURL} alt="" />
-        <p>¡Hola {userLog.displayName}!</p>
-      </div> */}
-
-      {console.log(users)}
+      {/* <button onClick={logout}>Log out</button> */}
       <div className={styles.login}>
         <div className={styles.container_left}>
           <img src="./images/logo.svg" alt="" />

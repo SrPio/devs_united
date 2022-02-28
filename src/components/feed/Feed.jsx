@@ -63,13 +63,9 @@ function Feed({
           console.log(error, "Error en snapshot");
         }
       );
-      //console.log(postsData);
       setPosts(postsData);
     });
-    /* const unsubscribeAuth = auth.onAuthStateChanged((user) => {
-      setUserLog(user);
-      console.log(user);
-    }); */
+
     return () => {
       unsub();
       //unsubscribeAuth();
@@ -94,13 +90,9 @@ function Feed({
           console.log(error, "Error en snapshot");
         }
       );
-      //console.log(usersData);
       setUsers(usersData);
     });
-    /* const unsubscribeAuth = auth.onAuthStateChanged((user) => {
-      setUserLog(user);
-      console.log(user);
-    }); */
+
     return () => {
       unsub();
       //unsubscribeAuth();
@@ -201,7 +193,7 @@ function Feed({
                 maxlength="200"
               />
               <h1 className={styles.limitText}>200 max.</h1>
-              <button /*disabled="disabled"*/ className={styles.postButton}>
+              <button className={styles.postButton}>
                 <img src="./images/button_post_on.svg" alt="" />
               </button>
             </form>
