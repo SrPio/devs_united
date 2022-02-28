@@ -125,7 +125,6 @@ function App() {
           </Route>
 
         </Routes>
-        {console.log(posts)}
       </BrowserRouter >
     </div >
 
