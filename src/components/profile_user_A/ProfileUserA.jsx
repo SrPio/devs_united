@@ -25,6 +25,7 @@ function ProfileUserA({
     return post.uid === userLog.uid;
   });
   console.log("Profile esto es users" + users);
+
   return (
     <div className={styles.profileA}>
       <header>
@@ -54,7 +55,7 @@ function ProfileUserA({
             alt="profile_pic"
             className={styles.profilePicStyle}
           />
-          <h1 className={styles.usernameStyle}>{userLog.email}</h1>;
+          <h1 className={styles.usernameStyle}>{userLog.displayName}</h1>;
           <div className={styles.tabButtons}>
             <button className={styles.postButtonSelected}>POSTS</button>
             <button className={styles.favButtonUnselected}>FAVORITES</button>

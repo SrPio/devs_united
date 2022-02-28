@@ -159,21 +159,8 @@ function Feed({
 
   return (
     <>
-      {/* <ProfileUserA posts={posts}/> */}
-
       <div className={styles.feed}>
         <header>
-          {/* {userLog ? (
-          <div className="user-profile">
-            <img className="user-profile-pic" src={userLog.photoURL} alt="" />
-            <p>¡Hola {userLog.displayName}!</p>
-            <button onClick={logout}>Log out</button>
-          </div>
-        ) : (
-          <button className="login-btn" onClick={loginConGoogle}>
-            Login con Google
-          </button>
-        )} */}
           <div className={styles.titleBox}>
             <Link to="/perfil">
               <img
@@ -211,10 +198,11 @@ function Feed({
                 placeholder="What’s happening?"
                 onChange={handleChange}
                 value={newPost.message}
+                maxlength="200"
               />
               <h1 className={styles.limitText}>200 max.</h1>
               <button /*disabled="disabled"*/ className={styles.postButton}>
-                <img src="./images/button_post_off.svg" alt="" />
+                <img src="./images/button_post_on.svg" alt="" />
               </button>
             </form>
           </div>

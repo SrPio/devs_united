@@ -145,6 +145,9 @@ article {
   line-height: 20px;
   color: #ffea5c;
   letter-spacing: -0.333333px;
+  width: 330px;
+  text-align: left;
+  overflow-wrap: break-word;
 }
 
 .message {
