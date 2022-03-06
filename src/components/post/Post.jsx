@@ -47,7 +47,15 @@ function Post({ generateUsername, userLog, handlerDelete, post }) {
           </button>
         </div>
         {post.uid === userLog?.uid ? (
-          <button onClick={handlerDelete} className={styles.deleteButton}>
+          <button
+            onClick={(e) => {
+              let idData = e.target.id;
+              if (window.confirm("¿Deseas eliminar la publicación?")) {
+                handlerDelete(idData);
+              }
+            }}
+            className={styles.deleteButton}
+          >
             <img id={post.id} src="./images/delete.svg" alt="" />
           </button>
         ) : null}

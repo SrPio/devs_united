@@ -55,14 +55,15 @@ function App() {
 
 
 
-  const handlerDelete = (e) => {
-    delPost(e.target.id).then((id) => {
+  const handlerDelete = (idData) => {
+    delPost(idData).then((id) => {
       const newPosts = posts.filter((post) => {
         return post.id !== id;
       });
       setPosts(newPosts);
     });
   };
+
 
   return (
     <div className="App">
