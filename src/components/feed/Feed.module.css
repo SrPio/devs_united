@@ -194,6 +194,7 @@ article {
   border: none;
   background-color: transparent;
   margin: 25px 0 26px;
+  cursor: pointer;
 }
 
 .contentPost {
