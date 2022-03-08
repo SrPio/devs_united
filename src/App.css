@@ -1,5 +1,10 @@
-@import url("http://fonts.cdnfonts.com/css/silkscreen");
+/*@import url("http://fonts.cdnfonts.com/css/silkscreen");*/
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap");
+
+@font-face {
+  font-family: silkscreen;
+  src: url(/public/fonts/slkscrb.ttf);
+}
 
 * {
   box-sizing: border-box;
@@ -8,5 +13,9 @@
 }
 .App {
   text-align: center;
-  background: #2E132C;
+  background: #2e132c;
+}
+
+a {
+  text-decoration: none;
 }
