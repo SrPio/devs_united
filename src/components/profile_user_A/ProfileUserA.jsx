@@ -17,10 +17,6 @@ function ProfileUserA({
   handlerDelete,
   userName,
 }) {
-  const logoutUser = () => {
-    return logout, setIsLoginVisible(true);
-  };
-
   const misPosts = posts.filter((post) => {
     return post.uid === userLog.uid;
   });
@@ -51,7 +47,6 @@ function ProfileUserA({
           <img
             src={userLog.photoURL}
             alt="Profile pic"
-            alt="profile_pic"
             className={styles.profilePicStyle}
           />
           <h1 className={styles.usernameStyle}>{userLog.displayName}</h1>;
