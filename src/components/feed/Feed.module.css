@@ -226,3 +226,50 @@ article {
 .container_name_date {
   display: flex;
 }
+
+/*---------Media Querys----------*/
+@media only screen and (max-width: 600px) {
+  .internalPostSection {
+    width: 90vw;
+  }
+
+  .inputPost,
+  .postArea,
+  .post,
+  .container_name_date {
+    width: 100%;
+  }
+
+  .container_name_date {
+    flex-direction: column;
+  }
+
+  .contentPost {
+    width: 60%;
+  }
+
+  .autor {
+    font-size: 0.8rem;
+    width: 80%;
+    margin-bottom: 0;
+  }
+
+  .message {
+    width: 90%;
+    font-size: 1.1rem;
+  }
+
+  .dateStyle {
+    width: 50%;
+    font-size: 0.8rem;
+    margin: 0 0 5px;
+    text-align: left;
+  }
+
+  .logo {
+    display: none;
+  }
+  .title {
+    margin-right: 18px;
+  }
+}
