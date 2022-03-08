@@ -39,7 +39,7 @@ function Login({ setUserLog, userName, userLog, setUsers, users }) {
           <img src="./images/logo.svg" alt="" />
         </div>
         <div className={styles.container_right}>
-          <h1 className={styles.principal_title}>LOREM IPSUM DOLOR</h1>
+          <h1 className={styles.principal_title}>LOREM IPSUM PROBANDO</h1>
           <h1 className={styles.subtitle}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </h1>

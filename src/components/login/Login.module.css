@@ -1,3 +1,6 @@
+@import url("http://fonts.cdnfonts.com/css/silkscreen");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap");
+
 .login {
   display: flex;
 }
@@ -232,4 +235,53 @@ input {
 
 .colorSelectedBorder {
   border: 5px solid #ffffff;
+}
+
+/*----------- MEDIA QUERIES ---------------*/
+
+@media only screen and (max-width: 600px) {
+  .login {
+    flex-direction: column;
+  }
+
+  .container_left,
+  .container_right {
+    height: 50vh;
+    width: 100%;
+  }
+
+  .container_left img {
+    width: 311px;
+    height: 207px;
+  }
+
+  .principal_title {
+    font-size: 36px;
+    line-height: 36px;
+    width: 311px;
+    height: 65px;
+  }
+
+  .subtitle {
+    width: 311px;
+    height: 42px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .btn_signIn img {
+    width: 85vw;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .login {
+    flex-direction: column;
+  }
+
+  .container_left,
+  .container_right {
+    height: 50vh;
+    width: 100%;
+  }
 }
