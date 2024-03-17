@@ -39,9 +39,9 @@ function Login({ setUserLog, userName, userLog, setUsers, users }) {
           <img src="./images/logo.svg" alt="" />
         </div>
         <div className={styles.container_right}>
-          <h1 className={styles.principal_title}>LOREM IPSUM PROBANDO</h1>
+          <h1 className={styles.principal_title}>Connect and Code!</h1>
           <h1 className={styles.subtitle}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          Join us to code, collaborate, and innovate together.
           </h1>
           <button
             className={styles.btn_signIn}
